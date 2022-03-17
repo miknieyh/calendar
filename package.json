@@ -1,43 +1,45 @@
 {
   "name": "calendar",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "miknieyh <tong_hye@naver.com>",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
   },
   "dependencies": {
-    "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "@nuxtjs/bootstrap": "^0.0.1",
+    "@popperjs/core": "^2.11.4",
+    "axios": "^0.26.1",
+    "bootstrap-vue": "^2.21.2",
+    "cjs": "^0.0.11",
+    "jquery": "^3.6.0",
+    "nuxt": "^2.0.0",
+    "portal-vue": "^2.1.7",
+    "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "babel-eslint": "^10.0.1",
+    "bootstrap": "^5.1.3",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^4.0.0"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miknieyh/calendar.git"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miknieyh/calendar/issues"
+  },
+  "homepage": "https://github.com/miknieyh/calendar#readme"
 }
