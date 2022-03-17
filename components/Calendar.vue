@@ -2,7 +2,7 @@
 
   <div>
     <header>
-    <h1 class="text-center align-content-center">Calendar 기본과제</h1>
+      <h1 class="text-center align-content-center">Calendar 기본과제</h1>
     </header>
     <div class="container">
       <div>
@@ -32,16 +32,20 @@
 
       <div class="container">
         <table class="table text-center">
+          <thead>
           <tr>
             <th>일자</th>
             <th>요일</th>
             <th>국경일</th>
           </tr>
-          <tr v-for="item in items" :key="item.date">
-            <td><span v-html="item.date"></span></td>
-            <td><span v-html="item.day"></span></td>
-            <td><span v-html="item.nationalDay"></span></td>
+          </thead>
+          <tbody>
+          <tr v-for="nationalday in nationalDays" :key="nationalday.dateName" >
+            <td>{{ nationalday.dateName }}</td>
+            <td>{{ nationalday.locdate }}</td>
+            <td>{{ nationalday.isHoliday }}</td>
           </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -50,13 +54,15 @@
 
 
 <script>
-
+var convert = require('xml-js')
+import axios from 'axios'
 import $ from 'jquery';
 
 export default {
   name: "CalendarComponents",
   data() {
     return {
+      nationalDays: [],
       days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       currentMonthInNumber: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
@@ -130,22 +136,34 @@ export default {
       this.drowCalendar(selectDate);
 
     },
-    drowCalendar(selectDate){
+    drowCalendar(selectDate) {
       const element = document.getElementById("calDatetest");
       var elementText1 = "";
       var elementText2 = "";
       var firstdayList = this.firstDay();
+      var lastDayofLastMonth =  new Date(this.currentYear, this.currentMonthInNumber , 0).getDate();
       //elementText1 전달 날짜 표시
-      for (var i in firstdayList){
-        elementText2 += "<p class=\"text-center text-muted\">"+(this.lastDayeofMonth-firstdayList[i]+1)+"</p>";
+      for (var i in firstdayList) {
+        elementText2 += "<p class=\"text-center text-muted\">" + (lastDayofLastMonth - firstdayList[i] + 1) + "</p>";
       }
       //elementText2 이달 날짜 표시
-      for (var i = 1; i < this.lastDayeofMonth+1; i++) {
-        elementText2 += "<p class="+this.selectDate(i,selectDate)+"><b>"+i+"</b></p>";
-      };
-      element.innerHTML = elementText1+elementText2;
+      for (var i = 1; i < this.lastDayeofMonth + 1; i++) {
+        elementText2 += "<p class=" + this.selectDate(i, selectDate) + "><b>" + i + "</b></p>";
+      }
+      ;
+      element.innerHTML = elementText1 + elementText2;
     }
-  }
+  },
+  created() {
+    var vm = this;
+    axios.get("http://localhost:4000/")
+      .then((res) => {
+        console.log(res)
+      })
+    .catch((err) => {
+      console.log(err)
+    })
+  },
 }
 
 </script>

@@ -1,15 +1,20 @@
-
 const webpack = require("webpack")
 
 module.exports = {
+  axios: {
+    proxy: false,
+    prefix: process.env.API_URI
+  },
+  modules:[
+    '@nuxtjs/axios'
+  ],
+  buildModules:[
+    '@nuxtjs/vuetify',
+  ],
   /*
   ** Headers of the page
   */
   head: {
-    script:[{
-      // 국경일 API
-      src:"http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getHoliDeInfo?ServiceKey=pttHWIl4dfMuWu4ZBaBagNtAzamjrs%2BMGE9JDETUED7tu4y1Dt8ajPP7qmxXBJZQTLLhFHjZ84EkuMHfkxZcnA%3D%3D"
-    }],
     title: 'calendar',
     meta: [
       { charset: 'utf-8' },
