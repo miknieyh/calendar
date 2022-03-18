@@ -35,7 +35,6 @@ module.exports = {
   build: {
     plugins: [
       new webpack.ProvidePlugin({
-        $: "jquery",
         "_":"lodash"
       })
     ],

@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
-      <change afterPath="$PROJECT_DIR$/back/index.js" afterDir="false" />
+    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="이전달 날짜 표시 기존에 현재달의 날짜가 표시되고 있던 것, 지난달로 뜨게 수정">
+      <change afterPath="$PROJECT_DIR$/back/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/dbConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/users.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/Calendar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/NationalDay.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +66,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="http.proxy" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="vuejs.nuxt.types-notification-shown" value="true" />
   </component>
@@ -75,7 +75,18 @@
       <recent name="D:\workspace\calendar\components" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.dev back">
+    <configuration name="dev back" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/back/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <arguments value="back" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -86,6 +97,10 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="npm.dev back" />
+      <item itemvalue="npm.dev" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -99,7 +114,8 @@
       <workItem from="1647484433020" duration="328000" />
       <workItem from="1647484869210" duration="79000" />
       <workItem from="1647484968490" duration="17491000" />
-      <workItem from="1647505200756" duration="5053000" />
+      <workItem from="1647505200756" duration="12262000" />
+      <workItem from="1647568129296" duration="3568000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
       <created>1647500891300</created>
@@ -108,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647500891300</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="이전달 날짜 표시 기존에 현재달의 날짜가 표시되고 있던 것, 지난달로 뜨게 수정">
+      <created>1647517279793</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647517279793</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,7 +150,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기" />
-    <option name="LAST_COMMIT_MESSAGE" value="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기" />
+    <MESSAGE value="이전달 날짜 표시 기존에 현재달의 날짜가 표시되고 있던 것, 지난달로 뜨게 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="이전달 날짜 표시 기존에 현재달의 날짜가 표시되고 있던 것, 지난달로 뜨게 수정" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="js.build_tools.npm">
+        <watch expression="axios.request" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

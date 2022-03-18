@@ -1,6 +1,7 @@
 <template>
 
   <div>
+    //todo vuex도입  컴포넌트별 상태관리
     <header>
       <h1 class="text-center align-content-center">Calendar 기본과제</h1>
     </header>
@@ -54,7 +55,7 @@
 
 
 <script>
-var convert = require('xml-js')
+var convert = require('xml-js')// to do var 바꾸고 require 개념공부
 import axios from 'axios'
 import $ from 'jquery';
 
@@ -78,7 +79,7 @@ export default {
     currentMonthName() {
       return new Date(this.currentYear, this.currentMonthInNumber).toLocaleString("default", {month: "long"})
     },
-    lastDayeofMonth() {
+    lastDayeofMonth() {  // todo 오타
       return new Date(this.currentYear, this.currentMonthInNumber + 1, 0).getDate()
     },
 
@@ -88,7 +89,7 @@ export default {
   },
   methods: {
     prev() {
-      if (this.currentMonthInNumber == 0) {
+      if (this.currentMonthInNumber == 0) { //todo 고정값은 const로 변수로 고정해서 설명글 주석으로 달기
         this.currentYear--;
         this.currentMonthInNumber = 11;
       } else {
@@ -112,22 +113,26 @@ export default {
         let selectDate = SelectDate
         if (selectDate.includes(calendarDate)) {
           return "text-primary"
-        } else return ""
+        } else {
+          return ""
+        }
       }
-
 
     },
     firstDay() {
       var firstDay = new Date(this.currentYear, this.currentMonthInNumber, 1).getDay();
       var firstdayList = [];
-      for (var i = firstDay; i > 0; i--) firstdayList.push(i);
+      for (var i = firstDay; i > 0; i--) {
+        firstdayList.push(i);
+      }
       return firstdayList
     },
     //조회 버튼 누르면 사이날짜 받아오기
     lookUp() {
+      //todo
       var selectDate = Array();
-      var curDate = new Date($('#startDate').val());
-      var endDate = new Date($('#endDate').val())
+      var curDate = new Date(document.getElementById('startDate').value);
+      var endDate = new Date(document.getElementById('endDate').value);
       while (curDate <= endDate) {
         selectDate.push(curDate.getFullYear() + "-" + curDate.getMonth() + "-" + curDate.getDate());
         curDate.setDate(curDate.getDate() + 1);
