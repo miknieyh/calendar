@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    //todo vuex도입  컴포넌트별 상태관리
+    <!-- todo vuex 도입  컴포넌트별 상태관리-->
     <header>
       <h1 class="text-center align-content-center">Calendar 기본과제</h1>
     </header>
@@ -20,7 +20,7 @@
           <div class="days d-flex">
             <p class="text-center" v-for="(day,index) in days" :key="index"><b>{{ day }}</b></p>
           </div>
-          <div class="dates d-flex" id="calDatetest">
+          <div class="dates d-flex" id="calDateTest">
 
           </div>
         </section>
@@ -41,11 +41,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="nationalday in nationalDays" :key="nationalday.dateName" >
-            <td>{{ nationalday.dateName }}</td>
-            <td>{{ nationalday.locdate }}</td>
-            <td>{{ nationalday.isHoliday }}</td>
-          </tr>
+<!--todo api 연결 후-->
+<!--          <tr v-for="nationalday in nationalDays" :key="nationalday.dateName">-->
+<!--            <td>{{ nationalday.dateName }}</td>-->
+<!--            <td>{{ nationalday.locdate }}</td>-->
+<!--            <td>{{ nationalday.isHoliday }}</td>-->
+<!--          </tr>-->
           </tbody>
         </table>
       </div>
@@ -55,9 +56,9 @@
 
 
 <script>
+
 var convert = require('xml-js')// to do var 바꾸고 require 개념공부
 import axios from 'axios'
-import $ from 'jquery';
 
 export default {
   name: "CalendarComponents",
@@ -67,25 +68,19 @@ export default {
       days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       currentMonthInNumber: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
-      items: [
-        {date: "2020-06-10", day: "수요일", nationalDay: "N"},
-        {date: "2020-06-10", day: "수요일", nationalDay: "N"},
-        {date: "2020-06-10", day: "수요일", nationalDay: "N"}
-      ],
-
     }
   },
   computed: {
     currentMonthName() {
       return new Date(this.currentYear, this.currentMonthInNumber).toLocaleString("default", {month: "long"})
     },
-    lastDayeofMonth() {  // todo 오타
+    lastDayOfMonth() {
       return new Date(this.currentYear, this.currentMonthInNumber + 1, 0).getDate()
     },
 
   },
   mounted() {
-    this.drowCalendar();
+    this.drawCalendar();
   },
   methods: {
     prev() {
@@ -117,7 +112,6 @@ export default {
           return ""
         }
       }
-
     },
     firstDay() {
       var firstDay = new Date(this.currentYear, this.currentMonthInNumber, 1).getDay();
@@ -138,21 +132,21 @@ export default {
         curDate.setDate(curDate.getDate() + 1);
       }
 
-      this.drowCalendar(selectDate);
+      this.drawCalendar(selectDate);
 
     },
-    drowCalendar(selectDate) {
-      const element = document.getElementById("calDatetest");
+    drawCalendar(selectDate) {
+      const element = document.getElementById("calDateTest");
       var elementText1 = "";
       var elementText2 = "";
       var firstdayList = this.firstDay();
-      var lastDayofLastMonth =  new Date(this.currentYear, this.currentMonthInNumber , 0).getDate();
+      var lastDayOfLastMonth = new Date(this.currentYear, this.currentMonthInNumber, 0).getDate();
       //elementText1 전달 날짜 표시
       for (var i in firstdayList) {
-        elementText2 += "<p class=\"text-center text-muted\">" + (lastDayofLastMonth - firstdayList[i] + 1) + "</p>";
+        elementText2 += "<p class=\"text-center text-muted\">" + (lastDayOfLastMonth - firstdayList[i] + 1) + "</p>";
       }
       //elementText2 이달 날짜 표시
-      for (var i = 1; i < this.lastDayeofMonth + 1; i++) {
+      for (var i = 1; i < this.lastDayOfMonth + 1; i++) {
         elementText2 += "<p class=" + this.selectDate(i, selectDate) + "><b>" + i + "</b></p>";
       }
       ;
@@ -165,9 +159,9 @@ export default {
       .then((res) => {
         console.log(res)
       })
-    .catch((err) => {
-      console.log(err)
-    })
+      .catch((err) => {
+        console.log(err)
+      })
   },
 }
 

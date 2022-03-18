@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="이전달 날짜 표시 기존에 현재달의 날짜가 표시되고 있던 것, 지난달로 뜨게 수정">
-      <change afterPath="$PROJECT_DIR$/back/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back/dbConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/users.js" afterDir="false" />
+    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="제이쿼리 없애기">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/Calendar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +112,7 @@
       <workItem from="1647484869210" duration="79000" />
       <workItem from="1647484968490" duration="17491000" />
       <workItem from="1647505200756" duration="12262000" />
-      <workItem from="1647568129296" duration="3568000" />
+      <workItem from="1647568129296" duration="6271000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
       <created>1647500891300</created>
@@ -131,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647517279793</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="제이쿼리 없애기">
+      <created>1647575558457</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1647575558457</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,7 +155,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기" />
     <MESSAGE value="이전달 날짜 표시 기존에 현재달의 날짜가 표시되고 있던 것, 지난달로 뜨게 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="이전달 날짜 표시 기존에 현재달의 날짜가 표시되고 있던 것, 지난달로 뜨게 수정" />
+    <MESSAGE value="제이쿼리 없애기" />
+    <option name="LAST_COMMIT_MESSAGE" value="제이쿼리 없애기" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
