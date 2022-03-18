@@ -4,12 +4,13 @@
   "description": "back-end",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon NODE_ENV=development nodemon app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios-debug-log": "^0.8.4",
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",

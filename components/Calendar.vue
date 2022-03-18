@@ -57,7 +57,7 @@
 
 <script>
 
-var convert = require('xml-js')// to do var 바꾸고 require 개념공부
+const convert = require('xml-js')
 import axios from 'axios'
 
 export default {
@@ -68,6 +68,8 @@ export default {
       days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       currentMonthInNumber: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
+      firstMonth: 0,
+      lastMonth: 11
     }
   },
   computed: {
@@ -84,9 +86,9 @@ export default {
   },
   methods: {
     prev() {
-      if (this.currentMonthInNumber == 0) { //todo 고정값은 const로 변수로 고정해서 설명글 주석으로 달기
+      if (this.currentMonthInNumber == this.firstMonth) { //0
         this.currentYear--;
-        this.currentMonthInNumber = 11;
+        this.currentMonthInNumber = this.lastMonth; //11
       } else {
         this.currentMonthInNumber--;
       }
@@ -94,9 +96,9 @@ export default {
 
     },
     next() {
-      if (this.currentMonthInNumber == 11) {
+      if (this.currentMonthInNumber == this.lastMonth) { //11
         this.currentYear++;
-        this.currentMonthInNumber = 0;
+        this.currentMonthInNumber = this.firstMonth; //0
       } else {
         this.currentMonthInNumber++;
       }
@@ -114,19 +116,18 @@ export default {
       }
     },
     firstDay() {
-      var firstDay = new Date(this.currentYear, this.currentMonthInNumber, 1).getDay();
-      var firstdayList = [];
-      for (var i = firstDay; i > 0; i--) {
-        firstdayList.push(i);
+      const firstDay = new Date(this.currentYear, this.currentMonthInNumber, 1).getDay();
+      let firstDayList = [];
+      for (let i = firstDay; i > 0; i--) {
+        firstDayList.push(i);
       }
-      return firstdayList
+      return firstDayList
     },
     //조회 버튼 누르면 사이날짜 받아오기
     lookUp() {
-      //todo
-      var selectDate = Array();
-      var curDate = new Date(document.getElementById('startDate').value);
-      var endDate = new Date(document.getElementById('endDate').value);
+      let selectDate = Array();
+      let curDate = new Date(document.getElementById('startDate').value);
+      const endDate = new Date(document.getElementById('endDate').value);
       while (curDate <= endDate) {
         selectDate.push(curDate.getFullYear() + "-" + curDate.getMonth() + "-" + curDate.getDate());
         curDate.setDate(curDate.getDate() + 1);
@@ -137,25 +138,25 @@ export default {
     },
     drawCalendar(selectDate) {
       const element = document.getElementById("calDateTest");
-      var elementText1 = "";
-      var elementText2 = "";
-      var firstdayList = this.firstDay();
-      var lastDayOfLastMonth = new Date(this.currentYear, this.currentMonthInNumber, 0).getDate();
+      let elementText1 = "";
+      let elementText2 = "";
+      let firstDayList = this.firstDay();
+      const lastDayOfLastMonth = new Date(this.currentYear, this.currentMonthInNumber, 0).getDate();
       //elementText1 전달 날짜 표시
-      for (var i in firstdayList) {
-        elementText2 += "<p class=\"text-center text-muted\">" + (lastDayOfLastMonth - firstdayList[i] + 1) + "</p>";
+      for (let date in firstDayList) {
+        elementText2 += "<p class=\"text-center text-muted\">" + (lastDayOfLastMonth - firstDayList[date] + 1) + "</p>";
       }
       //elementText2 이달 날짜 표시
-      for (var i = 1; i < this.lastDayOfMonth + 1; i++) {
-        elementText2 += "<p class=" + this.selectDate(i, selectDate) + "><b>" + i + "</b></p>";
+      for (let date = 1; date < this.lastDayOfMonth + 1; date++) {
+        elementText2 += "<p class=" + this.selectDate(date, selectDate) + "><b>" + date + "</b></p>";
       }
       ;
       element.innerHTML = elementText1 + elementText2;
     }
   },
   created() {
-    var vm = this;
-    axios.get("http://localhost:4000/")
+    let vm = this;
+    axios.get("http://localhost:4000/?solYear="+this.currentYear)
       .then((res) => {
         console.log(res)
       })

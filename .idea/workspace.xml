@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="제이쿼리 없애기">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/back/config/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/back/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/back/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/Calendar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +56,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="16.14.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="16.11.26" />
     <property name="jdk.selected.JAVA_MODULE" value="11" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/back" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -72,19 +76,18 @@
       <recent name="D:\workspace\calendar\components" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev back">
-    <configuration name="dev back" type="js.build_tools.npm" nameIsGenerated="true">
+  <component name="RunManager" selected="npm.back">
+    <configuration name="back" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/back/package.json" />
       <command value="run" />
       <scripts>
         <script value="dev" />
       </scripts>
-      <arguments value="back" />
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+    <configuration name="front" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
@@ -95,8 +98,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="npm.dev back" />
-      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.back" />
+      <item itemvalue="npm.front" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -112,7 +115,8 @@
       <workItem from="1647484869210" duration="79000" />
       <workItem from="1647484968490" duration="17491000" />
       <workItem from="1647505200756" duration="12262000" />
-      <workItem from="1647568129296" duration="6271000" />
+      <workItem from="1647568129296" duration="8454000" />
+      <workItem from="1647584125392" duration="9824000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
       <created>1647500891300</created>
@@ -135,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647575558457</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="제이쿼리 없애기">
+      <created>1647579414875</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647579414875</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,7 +172,7 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="js.build_tools.npm">
-        <watch expression="axios.request" />
+        <watch expression="axios.request" language="JavaScript" />
       </configuration>
     </watches-manager>
   </component>
