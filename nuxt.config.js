@@ -1,15 +1,36 @@
 const webpack = require("webpack")
 
 module.exports = {
+  devServer: {
+    host: '0.0.0.0',
+    hot: true,
+    disableHostCheck: true,
+    port: 3000,
+    https: false,
+    overlay: {
+      warnings: true,
+      errors: true }
+  },
   axios: {
     proxy: false,
     prefix: process.env.API_URI
   },
-  modules:[
-    '@nuxtjs/axios'
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
-  buildModules:[
-    '@nuxtjs/vuetify',
+  proxy: {
+    '/api': {
+      target: 'http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getHoliDeInfo',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite:{
+        '^/api':''
+      }
+    }
+  },
+  buildModules: [
+    '@nuxtjs/vuetify'
   ],
   /*
   ** Headers of the page
@@ -17,31 +38,32 @@ module.exports = {
   head: {
     title: 'calendar',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: 'Nuxt.js project'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: {color: '#3B8070'},
   /*
   ** Build configuration
   */
   build: {
     plugins: [
       new webpack.ProvidePlugin({
-        "_":"lodash"
+        "_": "lodash",
       })
+
     ],
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
