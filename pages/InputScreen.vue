@@ -1,5 +1,9 @@
 <template>
-<AppLogo/>
+
+  <div>
+    <main-button/>
+    <app-logo/></div>
+
 </template>
 
 <script>
@@ -10,11 +14,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
-import AppLogo from '~/components/MainButton.vue'
+import AppLogo from '~/components/InputScreen.vue'
+import MainButton from '~/components/MainButton.vue'
 Vue.config.productionTip = false;
 export default {
   components: {
-    AppLogo
+    AppLogo,
+    MainButton
   }
 
 }

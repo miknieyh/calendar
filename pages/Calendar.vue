@@ -1,9 +1,15 @@
-<template><div><main-button/>
-      <app-logo/>
+<template>
+  <div>
+  <main-button/>
+    <CalendarTitle/>
+    <div class="container">
+      <app-logo/><CalendarTable/>
+</div>
 </div>
 </template>
 
 <script>
+
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -13,9 +19,14 @@ Vue.use(IconsPlugin)
 
 import AppLogo from '~/components/Calendar.vue'
 import MainButton from '~/components/MainButton.vue'
+import CalendarTable from '~/components/CalendarTable'
+import CalendarTitle from "~/components/CalendarTitle"
+
 Vue.config.productionTip = false;
 export default {
   components: {
+    CalendarTitle,
+    CalendarTable,
     AppLogo,
     MainButton
   }

@@ -9,7 +9,8 @@ module.exports = {
     https: false,
     overlay: {
       warnings: true,
-      errors: true }
+      errors: true
+    }
   },
   axios: {
     proxy: false,
@@ -24,8 +25,8 @@ module.exports = {
       target: 'http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getHoliDeInfo',
       changeOrigin: true,
       secure: false,
-      pathRewrite:{
-        '^/api':''
+      pathRewrite: {
+        '^/api': ''
       }
     }
   },
@@ -50,27 +51,53 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: {color: '#3B8070'},
-  /*
-  ** Build configuration
-  */
-  build: {
-    plugins: [
-      new webpack.ProvidePlugin({
-        "_": "lodash",
+  router: {
+    mode: `history`,
+    extendRoutes(routes, resolve) {
+      routes.length = 0
+      routes.push({
+        path: "/Calendar",
+        component: resolve(__dirname, 'pages/Calendar.vue'),
+        name: "Calendar"
       })
-
-    ],
+      routes.push({
+        path: "/SearchScreen",
+        component: resolve(__dirname, 'pages/SearchScreen.vue'),
+        name: "SearchScreen",
+      })
+      routes.push({
+        path: "/InputScreen",
+        component: resolve(__dirname, 'pages/InputScreen.vue'),
+        name: "InputScreen",
+      })
+      routes.push({
+        path: "/",
+        component: resolve(__dirname, 'pages/Home.vue'),
+        name: "Home"
+      })
+    },
     /*
-    ** Run ESLint on save
+    ** Build configuration
     */
-    extend(config, {isDev, isClient}) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
+    build: {
+      plugins: [
+        new webpack.ProvidePlugin({
+          "_": "lodash",
         })
+
+      ],
+      /*
+      ** Run ESLint on save
+      */
+      extend(config, {isDev, isClient}) {
+        if (isDev && isClient) {
+          config.module.rules.push({
+            enforce: 'pre',
+            test: /\.(js|vue)$/,
+            loader: 'eslint-loader',
+            exclude: /(node_modules)/
+          })
+        }
       }
     }
   }

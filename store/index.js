@@ -16,7 +16,6 @@ const store = () => new Vuex.Store({
     drawCal: [],
     clickDate: "",
     firstDayList: [],
-    name: "Stackoverflow"
   },
   mutations: {
     firstDay(state) {
@@ -52,7 +51,6 @@ const store = () => new Vuex.Store({
     },
     getNationalList(state, data) {
       state.nationalDayList.push(data);
-
     },
     lookUp(state, actions) {
       state.selectDates = [];
@@ -61,10 +59,16 @@ const store = () => new Vuex.Store({
       const endDate = new Date(document.getElementById('endDate').value);
       while (curDate <= endDate) {
         let isNational = false;
-        let temp = new Map();
-        temp.set("date", curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate());
-        temp.set("day", state.days[curDate.getDay()]);
-        console.log()
+        let temp = {};
+        temp.date = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate();
+        temp.day = state.days[curDate.getDay()];
+        if (curDate.getDay() ===0 ){
+          temp._rowVariant ='danger';
+        }else if(curDate.getDay()===6){
+          temp._rowVariant = 'primary';
+        }else {
+          temp._rowVariant = 'light';
+        }
         for (let i in state.nationalDayList[0]) {
           let tempDate = String(state.nationalDayList[0][i]["locdate"]);
           let NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
@@ -72,11 +76,13 @@ const store = () => new Vuex.Store({
             === NationalDate.getFullYear().toString() + "-" + NationalDate.getMonth().toString() + "-" + NationalDate.getDate().toString()) {
             isNational = true;
           }
+
           if (isNational) {
-            temp.set("isNationalDay", "예");
+            temp.isNationalDay = "예";
           } else {
-            temp.set("isNationalDay", "아니오");
+            temp.isNationalDay= "아니오";
           }
+
         }
 
         state.selectDates.push(temp);
@@ -98,11 +104,12 @@ const store = () => new Vuex.Store({
           let calendarDate = state.currentYear + "-" + (state.currentMonthInNumber + 1) + "-" + date;
           let isSelect = "false";
           for (let i in state.selectDates) {
-            if (state.selectDates[i].get("date") === calendarDate) {
+            if (state.selectDates[i].date === calendarDate) {
               isSelect = "true";
             }
           }
-          state.drawCal.push({"date":date.toString(),"select":isSelect});
+          let day = new Date(state.currentYear,state.currentMonthInNumber,date).getDay()
+          state.drawCal.push({"date":date.toString(),"select":isSelect,"day":day});
         }
 
       }
@@ -126,10 +133,11 @@ const store = () => new Vuex.Store({
     getNationalList({commit}, currentYear) {
       let url = "http://localhost:3000/api";
       let ServiceKey = '?_type=json&ServiceKey=pttHWIl4dfMuWu4ZBaBagNtAzamjrs%2BMGE9JDETUED7tu4y1Dt8ajPP7qmxXBJZQTLLhFHjZ84EkuMHfkxZcnA%3D%3D&solYear=';
-
+      console.log('test');
       axios.get(url + ServiceKey + currentYear.toString(), {headers: {"Accept": "application/json"}})
         .then(res => {
           let nationalDayList = res.data["response"]["body"]["items"]["item"];
+          console.log('test2');
           commit('getNationalList', nationalDayList);
         }).catch(err => {
         console.log("error : ", err);
@@ -147,13 +155,12 @@ const store = () => new Vuex.Store({
     }
   },
   getters: {
-    name: (state) => {
-      return state.name;
-    }
-    ,
     currentMonthName: (state) => {
       return new Date(state.currentYear, state.currentMonthInNumber).toLocaleString("default", {month: "long"})
     },
+    rows: (state)=>{
+      return state.selectDates.length;
+    }
 
 
   }
