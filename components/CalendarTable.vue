@@ -125,27 +125,11 @@
       width: 14.28%;
     }
 
-    .dates {
-      flex-wrap: wrap;
-    }
-
-    .Button {
-      background-color: #42b983;
-      font-weight: bold;
-      color: white;
-    }
-
-    .textColor {
-      color: #42b983;
-    }
-
     section {
       margin-top: 30px;
     }
 
-    .calendarBox {
-      width: 50%
-    }
+
 
 
     </style>

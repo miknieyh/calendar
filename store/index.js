@@ -16,6 +16,7 @@ const store = () => new Vuex.Store({
     drawCal: [],
     clickDate: "",
     firstDayList: [],
+    drawCalAfter:[]
   },
   mutations: {
     firstDay(state) {
@@ -89,17 +90,19 @@ const store = () => new Vuex.Store({
         curDate.setDate(curDate.getDate() + 1);
       }
     },
-    drawCalendar(state, getters) {
+    drawCalendar(state) {
       state.drawCal = [];
       state.drawCalEx = [];
+      state.drawCalAfter = [];
       let firstDayList = state.firstDayList;
       const lastDayOfLastMonth = new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
-      //elementText1 전달 날짜 표시
+      const lastDayOfCurrentMonth = new Date(state.currentYear,state.currentMonthInNumber+1,0).getDate();
+      //전달 날짜 표시
       for (let date in firstDayList) {
         state.drawCalEx.push(lastDayOfLastMonth - firstDayList[date] + 1);
       }
-      //elementText2 이달 날짜 표시
-      for (let date = 1; date < lastDayOfLastMonth + 1; date++) {
+      //이달 날짜 표시
+      for (let date = 1; date < lastDayOfCurrentMonth + 1; date++) {
         if (state.selectDates != null && state.selectDates !== []) {
           let calendarDate = state.currentYear + "-" + (state.currentMonthInNumber + 1) + "-" + date;
           let isSelect = "false";
@@ -111,7 +114,11 @@ const store = () => new Vuex.Store({
           let day = new Date(state.currentYear,state.currentMonthInNumber,date).getDay()
           state.drawCal.push({"date":date.toString(),"select":isSelect,"day":day});
         }
-
+      }
+      //다음달 날짜 표시
+      const afterDate = 6-new Date(state.currentYear,state.currentMonthInNumber,lastDayOfCurrentMonth).getDay();
+      for(let date=1;date<=afterDate;date++){
+        state.drawCalAfter.push(date);
       }
     }
   },

@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="vuex store 셋팅(기존 data,method) --&gt; store로 옮김">
-      <change afterPath="$PROJECT_DIR$/components/CalendarSelectDate.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/CalendarTitle.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/DBInputCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/DBTable.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/InputScreen.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/Home.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/InputScreen.vue" afterDir="false" />
+    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="pagination 완료, 토,일 표시 완료, inputScreen과 searchScreen ui 그리기 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/Calendar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/CalendarTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/CalendarTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/MainButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/MainButton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/SearchScreen.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/SearchScreen.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Calendar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/Db.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/SearchScreen.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/Main.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +121,7 @@
       <workItem from="1648023435084" duration="24509000" />
       <workItem from="1648104948550" duration="15000" />
       <workItem from="1648112372970" duration="370000" />
-      <workItem from="1648169459208" duration="2486000" />
+      <workItem from="1648169459208" duration="4627000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
       <created>1647500891300</created>
@@ -192,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648019369896</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="pagination 완료, 토,일 표시 완료, inputScreen과 searchScreen ui 그리기 완료">
+      <created>1648177721239</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1648177721239</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +212,8 @@
     <MESSAGE value="국경일 api 가져오기" />
     <MESSAGE value="DB설계과제 Ui그리기" />
     <MESSAGE value="vuex store 셋팅(기존 data,method) --&gt; store로 옮김" />
-    <option name="LAST_COMMIT_MESSAGE" value="vuex store 셋팅(기존 data,method) --&gt; store로 옮김" />
+    <MESSAGE value="pagination 완료, 토,일 표시 완료, inputScreen과 searchScreen ui 그리기 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="pagination 완료, 토,일 표시 완료, inputScreen과 searchScreen ui 그리기 완료" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

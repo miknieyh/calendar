@@ -17,7 +17,7 @@
           <div class="days d-flex">
             <p class="text-center" v-for="(day,index) in days" :key="'days'+index"><b>{{ day }}</b></p>
           </div>
-          <div class="dates d-flex" id="calDateTest">
+          <div class="dates d-flex">
             <p v-for="date in drawCalEx" :key="'drawCalEx'+date">
               <button class="btn clickButton" disabled>{{ date }}</button>
             </p>
@@ -42,6 +42,11 @@
                 </button>
               </span>
             </span>
+
+            <p v-for="date in drawCalAfter" :key="'drawCalAfter'+date">
+              <button class="btn clickButton" disabled>{{ date }}</button>
+            </p>
+
           </div>
         </section>
         <section class="d-flex justify-content-center">
@@ -78,7 +83,8 @@ export default {
       selectDates: 'selectDates',
       drawCalEx: 'drawCalEx',
       clickDate: 'clickDate',
-      drawCal: 'drawCal'
+      drawCal: 'drawCal',
+      drawCalAfter: 'drawCalAfter'
     }),
     ...mapGetters({
       currentMonthName: 'currentMonthName',
@@ -161,11 +167,6 @@ span {
   background-color: #42b983;
   font-weight: bold;
   color: white;
-}
-
-.clickedButton {
-  color: #42b983;
-  font-weight: bolder;
 }
 
 section {
