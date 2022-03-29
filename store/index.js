@@ -50,7 +50,6 @@ const store = () => new Vuex.Store({
         state.currentYear--;
         state.currentMonthInNumber = state.lastMonth; //11
       }
-
       if (!isFirstMonth()) {
         state.currentMonthInNumber--;
       }
@@ -97,6 +96,7 @@ const store = () => new Vuex.Store({
         }
 
         temp._rowVariant = 'light';
+
         if (weekend[curDate.getDay()] != null) {
           temp._rowVariant = weekend[curDate.getDay()]
         }
@@ -109,9 +109,9 @@ const store = () => new Vuex.Store({
               + state.hyphen
               + NationalDate.getMonth().toString() + state.hyphen
               + NationalDate.getDate().toString()))
-
           temp.isNationalDay = isNational ? "예" : "아니오";
         }
+
         state.selectDates.push(temp);
         curDate.setDate(curDate.getDate() + 1);
       }
@@ -126,17 +126,18 @@ const store = () => new Vuex.Store({
       for (let date in firstDayList) {
         state.drawCalEx.push(getters.lastDayOfLastMonth - firstDayList[date] + 1);
       }
-      //다음달 날짜 표시
 
+      //다음달 날짜 표시
       const afterDate = state.weekDay - getters.currentDay;
+
       for (let date = 1; date <= afterDate; date++) {
         state.drawCalAfter.push(date);
       }
+
       //이달 날짜 표시
       const selectDatesNotNull = selectDates => selectDates !== null && selectDates !== [];
 
       for (let date = 1; date < getters.lastDayOfCurrentMonth + 1; date++) {
-
         if (selectDatesNotNull(state.selectDates)) {
           const selectDatesList = state.selectDates.map(row => row.date);
           let isSelect =
@@ -145,9 +146,7 @@ const store = () => new Vuex.Store({
                 + state.hyphen
                 + (state.currentMonthInNumber + 1).toString()
                 + state.hyphen + date.toString())).toString();
-
           let day = new Date(state.currentYear, state.currentMonthInNumber, date).getDay()
-
           state.drawCal.push({"date": date.toString(), "select": isSelect, "day": day});
         }
       }
