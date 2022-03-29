@@ -21,7 +21,6 @@
             <p v-for="date in drawCalEx" :key="'drawCalEx'+date">
               <button class="btn clickButton" disabled>{{ date }}</button>
             </p>
-
             <span v-for="date in drawCal" :key="'drawCal'+date.date">
               <span v-if="date.select ==='true'">
                 <span v-if="date.day=== 6">

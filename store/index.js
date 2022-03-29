@@ -16,7 +16,11 @@ const store = () => new Vuex.Store({
     drawCal: [],
     clickDate: "",
     firstDayList: [],
-    drawCalAfter:[]
+    drawCalAfter: [],
+    YEAR_NAME: "년",
+    MONTH_NAME: "월",
+    DATE_NAME: "일",
+    hyphen : '-'
   },
   mutations: {
     firstDay(state) {
@@ -27,22 +31,27 @@ const store = () => new Vuex.Store({
       }
     },
     updateClickDate(state, newClickDate) {
-      state.clickDateString = state.currentYear.toString() + "년 " + (state.currentMonthInNumber + 1).toString() + "월 " + newClickDate.date["date"] + "일";
-      state.clickDate = state.currentYear.toString() + "-" + (state.currentMonthInNumber + 1).toString() + "-" + newClickDate.date["date"];
+      state.clickDateString = state.currentYear.toString()+state.YEAR_NAME+(state.currentMonthInNumber + 1).toString()+state.MONTH_NAME+newClickDate.date["date"]+state.DATE_NAME;
+      state.clickDate = state.currentYear.toString() + state.hyphen + (state.currentMonthInNumber + 1).toString() + state.hyphen + newClickDate.date["date"];
     },
     prev(state) {
-      if (state.currentMonthInNumber === state.firstMonth) { //0
+      const isFirstMonth = () =>state.currentMonthInNumber === state.firstMonth;
+      if (isFirstMonth()) { //0
         state.currentYear--;
         state.currentMonthInNumber = state.lastMonth; //11
-      } else {
+      }
+
+      if(!isFirstMonth()) {
         state.currentMonthInNumber--;
       }
     },
     next(state) {
-      if (state.currentMonthInNumber === state.lastMonth) { //11
+      const isLastMonth = () =>state.currentMonthInNumber === state.lastMonth;
+      if (isLastMonth()) { //11
         state.currentYear++;
         state.currentMonthInNumber = state.firstMonth; //0
-      } else {
+      }
+      if (!isLastMonth()) {
         state.currentMonthInNumber++;
       }
     },
@@ -53,39 +62,37 @@ const store = () => new Vuex.Store({
     getNationalList(state, data) {
       state.nationalDayList.push(data);
     },
-    lookUp(state, actions) {
+    lookUp(state) {
       state.selectDates = [];
 
       let curDate = new Date(document.getElementById('startDate').value);
       const endDate = new Date(document.getElementById('endDate').value);
+
+      const isCurDate = (date) => (curDate.getFullYear().toString()+state.hyphen+(curDate.getMonth() + 1).toString()+state.hyphen+curDate.getDate().toString()) === date;
       while (curDate <= endDate) {
         let isNational = false;
         let temp = {};
-        temp.date = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate();
+        temp.date = curDate.getFullYear() + state.hyphen + (curDate.getMonth() + 1) + state.hyphen + curDate.getDate();
         temp.day = state.days[curDate.getDay()];
-        if (curDate.getDay() ===0 ){
-          temp._rowVariant ='danger';
-        }else if(curDate.getDay()===6){
-          temp._rowVariant = 'primary';
-        }else {
-          temp._rowVariant = 'light';
+
+        const weekend = {
+          0: 'danger', //sun
+          6: 'primary' //sat
         }
+
+        temp._rowVariant = 'light';
+        if (weekend[curDate.getDay()] != null) {
+          temp._rowVariant = weekend[curDate.getDay()]
+        }
+
         for (let i in state.nationalDayList[0]) {
           let tempDate = String(state.nationalDayList[0][i]["locdate"]);
-          let NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
-          if (curDate.getFullYear().toString() + "-" + (curDate.getMonth() + 1).toString() + "-" + curDate.getDate().toString()
-            === NationalDate.getFullYear().toString() + "-" + NationalDate.getMonth().toString() + "-" + NationalDate.getDate().toString()) {
-            isNational = true;
-          }
+          const NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
+          isNational = isCurDate(this.setDateFormat(NationalDate.getFullYear().toString(), NationalDate.getMonth().toString(), NationalDate.getDate().toString()))
 
-          if (isNational) {
-            temp.isNationalDay = "예";
-          } else {
-            temp.isNationalDay= "아니오";
-          }
+          temp.isNationalDay = isNational ? "예" : "아니오";
 
         }
-
         state.selectDates.push(temp);
         curDate.setDate(curDate.getDate() + 1);
       }
@@ -96,41 +103,39 @@ const store = () => new Vuex.Store({
       state.drawCalAfter = [];
       let firstDayList = state.firstDayList;
       const lastDayOfLastMonth = new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
-      const lastDayOfCurrentMonth = new Date(state.currentYear,state.currentMonthInNumber+1,0).getDate();
+      const lastDayOfCurrentMonth = new Date(state.currentYear, state.currentMonthInNumber + 1, 0).getDate();
+
       //전달 날짜 표시
       for (let date in firstDayList) {
         state.drawCalEx.push(lastDayOfLastMonth - firstDayList[date] + 1);
       }
-      //이달 날짜 표시
-      for (let date = 1; date < lastDayOfCurrentMonth + 1; date++) {
-        if (state.selectDates != null && state.selectDates !== []) {
-          let calendarDate = state.currentYear + "-" + (state.currentMonthInNumber + 1) + "-" + date;
-          let isSelect = "false";
-          for (let i in state.selectDates) {
-            if (state.selectDates[i].date === calendarDate) {
-              isSelect = "true";
-            }
-          }
-          let day = new Date(state.currentYear,state.currentMonthInNumber,date).getDay()
-          state.drawCal.push({"date":date.toString(),"select":isSelect,"day":day});
-        }
-      }
       //다음달 날짜 표시
-      const afterDate = 6-new Date(state.currentYear,state.currentMonthInNumber,lastDayOfCurrentMonth).getDay();
-      for(let date=1;date<=afterDate;date++){
+      const afterDate = 6 - new Date(state.currentYear, state.currentMonthInNumber, lastDayOfCurrentMonth).getDay();
+      for (let date = 1; date <= afterDate; date++) {
         state.drawCalAfter.push(date);
+      }
+      //이달 날짜 표시
+      const selectDatesNotNull = selectDates => selectDates !== null && selectDates !== [];
+
+      for (let date = 1; date < lastDayOfCurrentMonth + 1; date++) {
+
+        if (selectDatesNotNull(state.selectDates)) {
+          const selectDatesList = state.selectDates.map(row=>row.date);
+          let isSelect = selectDatesList.includes((state.currentYear.toString()+state.hyphen+(state.currentMonthInNumber+1).toString()+state.hyphen+date.toString())).toString();
+          let day = new Date(state.currentYear, state.currentMonthInNumber, date).getDay()
+
+          state.drawCal.push({"date": date.toString(),"select": isSelect, "day": day});
+        }
       }
     }
   },
   actions: {
     updateClickDate(context, newClickDate) {
       context.commit('updateClickDate', newClickDate);
-    }
-    ,
+    },
     prev(context) {
       context.commit('prev');
-    }
-    ,
+    },
     next(context) {
       context.commit('next');
     },
@@ -149,7 +154,6 @@ const store = () => new Vuex.Store({
         }).catch(err => {
         console.log("error : ", err);
       })
-
     },
     lookUp(context) {
       context.commit('lookUp');
@@ -165,11 +169,9 @@ const store = () => new Vuex.Store({
     currentMonthName: (state) => {
       return new Date(state.currentYear, state.currentMonthInNumber).toLocaleString("default", {month: "long"})
     },
-    rows: (state)=>{
+    rows: (state) => {
       return state.selectDates.length;
-    }
-
-
+    },
   }
 })
 
