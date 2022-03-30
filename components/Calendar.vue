@@ -73,7 +73,6 @@ export default {
   computed: {
 
     ...mapState({ //data vuex 에서 가져오는 것
-      nationalDayList: 'nationalDayList',
       days: 'days',
       currentMonthInNumber: 'currentMonthInNumber',
       currentYear: 'currentYear',

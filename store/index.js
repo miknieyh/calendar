@@ -4,7 +4,6 @@ import Vuex from 'vuex'
 const store = () => new Vuex.Store({
   state: {
     currentMonthName: "",
-    nationalDayList: [],
     days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     currentMonthInNumber: new Date().getMonth(),
     currentYear: new Date().getFullYear(),
@@ -22,12 +21,14 @@ const store = () => new Vuex.Store({
     MONTH_NAME: "월",
     DATE_NAME: "일",
     hyphen: '-',
-    nationalDateStringList:[]
+    nationalDateStringList: []
   },
   mutations: {
     firstDay(state) {
       const firstDay = new Date(state.currentYear, state.currentMonthInNumber, 1).getDay();
-      state.firstDayList = Array(firstDay).fill().map((value,index)=> {return index+1}).reverse();
+      state.firstDayList = Array(firstDay).fill().map((value, index) => {
+        return index + 1
+      }).reverse();
     },
     updateClickDate(state, newClickDate) {
       state.clickDateString =
@@ -36,7 +37,7 @@ const store = () => new Vuex.Store({
         + (state.currentMonthInNumber + 1).toString()
         + state.MONTH_NAME + newClickDate.date["date"] + state.DATE_NAME;
       const clickDateList =
-        [state.currentYear.toString(),(state.currentMonthInNumber + 1).toString(), newClickDate.date["date"]];
+        [state.currentYear.toString(), (state.currentMonthInNumber + 1).toString(), newClickDate.date["date"]];
       state.clickDate = clickDateList.join(state.hyphen);
     },
     prev(state) {
@@ -64,15 +65,14 @@ const store = () => new Vuex.Store({
       state.currentMonthInNumber = new Date(document.getElementById('startDate').value).getMonth();
     },
     getNationalList(state, data) {
-      state.nationalDayList.push(data);
-      for (let i in state.nationalDayList[0]) {
-        const tempDate = String(state.nationalDayList[0][i]["locdate"]);
+      data.forEach(data => {
+        const tempDate = String(data["locdate"]);
         const NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
         const NationalDateList =
-          [NationalDate.getFullYear().toString(),NationalDate.getMonth().toString(),NationalDate.getDate().toString()]
+          [NationalDate.getFullYear().toString(), NationalDate.getMonth().toString(), NationalDate.getDate().toString()]
         const nationalDateString = NationalDateList.join(state.hyphen);
         state.nationalDateStringList.push(nationalDateString);
-      }
+      })
     },
     lookUp(state) {
       state.selectDates = [];
@@ -85,13 +85,13 @@ const store = () => new Vuex.Store({
       }
       while (curDate <= endDate) {
         const curDateList =
-          [curDate.getFullYear().toString(),(curDate.getMonth() + 1).toString(),curDate.getDate().toString()]
+          [curDate.getFullYear().toString(), (curDate.getMonth() + 1).toString(), curDate.getDate().toString()]
         const curDateListString = curDateList.join(state.hyphen);
         let temp = {};
         temp.date = curDate.getFullYear() + state.hyphen + (curDate.getMonth() + 1) + state.hyphen + curDate.getDate();
         temp.day = state.days[curDate.getDay()];
         temp._rowVariant = weekend[curDate.getDay()]
-        temp.isNationalDay = state.nationalDateStringList.includes(curDateListString)?  "예" : "아니오";
+        temp.isNationalDay = state.nationalDateStringList.includes(curDateListString) ? "예" : "아니오";
         state.selectDates.push(temp);
         curDate.setDate(curDate.getDate() + 1);
       }
@@ -99,12 +99,12 @@ const store = () => new Vuex.Store({
     drawCalendar(state) {
       const lastDayOfLastMonth = new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
       const lastDayOfCurrentMonth = new Date(state.currentYear, state.currentMonthInNumber + 1, 0).getDate();
-      const currentDay = new Date(state.currentYear, state.currentMonthInNumber,lastDayOfCurrentMonth).getDay();
-      const afterDate = state.weekDay-currentDay;
+      const currentDay = new Date(state.currentYear, state.currentMonthInNumber, lastDayOfCurrentMonth).getDay();
+      const afterDate = state.weekDay - currentDay;
       const selectDatesList = state.selectDates.map(row => row.date);
 
       const makeDateString = date => {
-        return [state.currentYear.toString(),(state.currentMonthInNumber + 1).toString(), date.toString()]
+        return [state.currentYear.toString(), (state.currentMonthInNumber + 1).toString(), date.toString()]
       }
       const makeDay = date => {
         return new Date(state.currentYear, state.currentMonthInNumber, date).getDay()
@@ -113,17 +113,21 @@ const store = () => new Vuex.Store({
         return selectDatesList.includes(makeDateString(date).join(state.hyphen)).toString();
       }
 
-      state.drawCalEx = state.firstDayList.map((value) => {return lastDayOfLastMonth-value+ 1 });
+      state.drawCalEx = state.firstDayList.map((value) => {
+        return lastDayOfLastMonth - value + 1
+      });
 
-      state.drawCalAfter = Array(afterDate).fill().map((value,index)=>{return index+1});
+      state.drawCalAfter = Array(afterDate).fill().map((value, index) => {
+        return index + 1
+      });
 
       state.drawCal = Array(lastDayOfCurrentMonth)
         .fill()
-        .map((value,date) => {
-        return {
-          "date": (date+1).toString(), "select": isSelect((date+1)), "day": makeDay((date+1))
-        }
-      })
+        .map((value, date) => {
+          return {
+            "date": (date + 1).toString(), "select": isSelect((date + 1)), "day": makeDay((date + 1))
+          }
+        })
 
     }
   },
