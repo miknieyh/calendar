@@ -26,7 +26,9 @@ const store = () => new Vuex.Store({
   mutations: {
     firstDay(state) {
       const firstDay = new Date(state.currentYear, state.currentMonthInNumber, 1).getDay();
-      state.firstDayList = Array(firstDay).fill().map((value, index) => {
+      state.firstDayList = Array(firstDay)
+        .fill()
+        .map((value, index) => {
         return index + 1
       }).reverse();
     },
