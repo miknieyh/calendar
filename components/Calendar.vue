@@ -25,19 +25,20 @@
               <span v-if="date.select ==='true'">
                 <span v-if="date.day=== 6">
                 <button class="btn fw-bolder text-primary" @click="updateClickDate({date})">
-                {{ date.date }}</button>
+                  {{ date.date }}</button>
                 </span>
                 <span v-else-if="date.day === 0">
                 <button class="btn fw-bolder text-danger" @click="updateClickDate({date})">
-                {{ date.date }}</button>
+                  {{ date.date }}</button>
                 </span>
                 <span v-else>
                 <button class="btn fw-bolder text-black" @click="updateClickDate({date})">
-                {{ date.date }}</button>
+                  {{ date.date }}</button>
                 </span>
               </span>
               <span v-else>
-                <button class="btn clickButton" disabled><b>{{ date.date }}</b>
+                <button class="btn clickButton" disabled>
+                  <b>{{ date.date }}</b>
                 </button>
               </span>
             </span>

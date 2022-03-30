@@ -21,7 +21,8 @@ const store = () => new Vuex.Store({
     YEAR_NAME: "년",
     MONTH_NAME: "월",
     DATE_NAME: "일",
-    hyphen: '-'
+    hyphen: '-',
+    nationalDateStringList:[]
   },
   mutations: {
     firstDay(state) {
@@ -64,44 +65,33 @@ const store = () => new Vuex.Store({
     },
     getNationalList(state, data) {
       state.nationalDayList.push(data);
+      for (let i in state.nationalDayList[0]) {
+        const tempDate = String(state.nationalDayList[0][i]["locdate"]);
+        const NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
+        const NationalDateList =
+          [NationalDate.getFullYear().toString(),NationalDate.getMonth().toString(),NationalDate.getDate().toString()]
+        const nationalDateString = NationalDateList.join(state.hyphen);
+        state.nationalDateStringList.push(nationalDateString);
+      }
     },
     lookUp(state) {
       state.selectDates = [];
-
       const curDate = new Date(document.getElementById('startDate').value);
       const endDate = new Date(document.getElementById('endDate').value);
-      const curDateList =
-        [curDate.getFullYear().toString(),(curDate.getMonth() + 1).toString(),curDate.getDate().toString()]
-      const curDateListString = curDateList.join(state.hyphen);
-
-      const isCurDate = date => curDateListString === date;
-
+      const weekend = {
+        0: 'danger', //sun
+        6: 'primary', //sat
+        null: 'light'
+      }
       while (curDate <= endDate) {
+        const curDateList =
+          [curDate.getFullYear().toString(),(curDate.getMonth() + 1).toString(),curDate.getDate().toString()]
+        const curDateListString = curDateList.join(state.hyphen);
         let temp = {};
         temp.date = curDate.getFullYear() + state.hyphen + (curDate.getMonth() + 1) + state.hyphen + curDate.getDate();
         temp.day = state.days[curDate.getDay()];
-
-        const weekend = {
-          0: 'danger', //sun
-          6: 'primary' //sat
-        }
-        const isNotNull = weekend => weekend != null
-
-        temp._rowVariant = 'light';
-
-        if (isNotNull(weekend[curDate.getDay()])) {
-          temp._rowVariant = weekend[curDate.getDay()]
-        }
-
-        for (let i in state.nationalDayList[0]) {
-          const tempDate = String(state.nationalDayList[0][i]["locdate"]);
-          const NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
-          const NationalDateList =
-            [NationalDate.getFullYear().toString(),NationalDate.getMonth().toString(),NationalDate.getDate().toString()]
-          const NationalDateString = NationalDateList.join(state.hyphen);
-          temp.isNationalDay = isCurDate(NationalDateString) ? "예" : "아니오";
-        }
-
+        temp._rowVariant = weekend[curDate.getDay()]
+        temp.isNationalDay = state.nationalDateStringList.includes(curDateListString)?  "예" : "아니오";
         state.selectDates.push(temp);
         curDate.setDate(curDate.getDate() + 1);
       }
@@ -112,6 +102,7 @@ const store = () => new Vuex.Store({
       const currentDay = new Date(state.currentYear, state.currentMonthInNumber,lastDayOfCurrentMonth).getDay();
       const afterDate = state.weekDay-currentDay;
       const selectDatesList = state.selectDates.map(row => row.date);
+
       const makeDateString = date => {
         return [state.currentYear.toString(),(state.currentMonthInNumber + 1).toString(), date.toString()]
       }
