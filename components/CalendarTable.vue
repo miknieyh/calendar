@@ -51,14 +51,7 @@
           currentMonthName: 'currentMonthName',
           rows : 'rows'
         })
-      }
-      ,
-      mounted() {
-        this.drawCalendar();
-        this.getNationalList();
-
-      }
-      ,
+      },
       methods: {
         nextPage() {
           this.$store.dispatch('nextPage');
@@ -66,53 +59,8 @@
         prevPage() {
           this.$store.dispatch('prevPage');
         },
-        updateClickDate(newClickDate) {
-          this.$store.dispatch('updateClickDate', newClickDate);
-        }
-        ,
-        prev() {
-          this.$store.dispatch('prev');
-          this.lookUp();
-        }
-        ,
-        next() {
-          this.$store.dispatch('next');
-          this.lookUp();
-        }
-        ,
-        selectDate(date, SelectDates) {
-          return this.$store.getters.selectDate(this.$store.state, date, SelectDates);
-        }
-        ,
-        firstDay() {
-          return this.$store.dispatch('firstDay');
-        }
-        ,
-        //조회 버튼 누르면 사이날짜 받아오기
-        lookUpPage() {
-          this.$store.dispatch('lookUpPage');
-          this.lookUp()
-        }
-        ,
-        getNationalList() {
-          this.$store.dispatch('getNationalList', this.currentYear);
-        }
-        ,
-        lookUp() {
-          this.$store.dispatch('lookUp');
-          this.drawCalendar();
-        }
-        ,
-        drawCalendar() {
-          this.firstDay()
-          this.$store.dispatch('drawCalendar');
-        }
+
       }
-      ,
-      created() {
-
-      },
-
     }
     </script>
 

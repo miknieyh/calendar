@@ -37,12 +37,9 @@ const store = () => new Vuex.Store({
         + state.YEAR_NAME
         + (state.currentMonthInNumber + 1).toString()
         + state.MONTH_NAME + newClickDate.date["date"] + state.DATE_NAME;
-      state.clickDate =
-        state.currentYear.toString()
-        + state.hyphen
-        + (state.currentMonthInNumber + 1).toString()
-        + state.hyphen
-        + newClickDate.date["date"];
+      const clickDateList =
+        [state.currentYear.toString(),(state.currentMonthInNumber + 1).toString(), newClickDate.date["date"]];
+      state.clickDate = clickDateList.join(state.hyphen);
     },
     prev(state) {
       const isFirstMonth = () => state.currentMonthInNumber === state.firstMonth;
@@ -74,18 +71,15 @@ const store = () => new Vuex.Store({
     lookUp(state) {
       state.selectDates = [];
 
-      let curDate = new Date(document.getElementById('startDate').value);
+      const curDate = new Date(document.getElementById('startDate').value);
       const endDate = new Date(document.getElementById('endDate').value);
+      const curDateList =
+        [curDate.getFullYear().toString(),(curDate.getMonth() + 1).toString(),curDate.getDate().toString()]
+      const curDateListString = curDateList.join(state.hyphen);
 
-      const isCurDate =
-        (date) => (curDate.getFullYear().toString()
-          + state.hyphen
-          + (curDate.getMonth() + 1).toString()
-          + state.hyphen
-          + curDate.getDate().toString()) === date;
+      const isCurDate = date => curDateListString === date;
 
       while (curDate <= endDate) {
-        let isNational = false;
         let temp = {};
         temp.date = curDate.getFullYear() + state.hyphen + (curDate.getMonth() + 1) + state.hyphen + curDate.getDate();
         temp.day = state.days[curDate.getDay()];
@@ -94,42 +88,43 @@ const store = () => new Vuex.Store({
           0: 'danger', //sun
           6: 'primary' //sat
         }
+        const isNotNull = weekend => weekend != null
 
         temp._rowVariant = 'light';
 
-        if (weekend[curDate.getDay()] != null) {
+        if (isNotNull(weekend[curDate.getDay()])) {
           temp._rowVariant = weekend[curDate.getDay()]
         }
 
         for (let i in state.nationalDayList[0]) {
-          let tempDate = String(state.nationalDayList[0][i]["locdate"]);
+          const tempDate = String(state.nationalDayList[0][i]["locdate"]);
           const NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
-          isNational =
-            isCurDate((NationalDate.getFullYear().toString()
-              + state.hyphen
-              + NationalDate.getMonth().toString() + state.hyphen
-              + NationalDate.getDate().toString()))
-          temp.isNationalDay = isNational ? "예" : "아니오";
+          const NationalDateList =
+            [NationalDate.getFullYear().toString(),NationalDate.getMonth().toString(),NationalDate.getDate().toString()]
+          const NationalDateString = NationalDateList.join(state.hyphen);
+          temp.isNationalDay = isCurDate(NationalDateString) ? "예" : "아니오";
         }
 
         state.selectDates.push(temp);
         curDate.setDate(curDate.getDate() + 1);
       }
     },
-    drawCalendar(state, getters) {
+    drawCalendar(state) {
       state.drawCal = [];
       state.drawCalEx = [];
       state.drawCalAfter = [];
-      let firstDayList = state.firstDayList;
+      const firstDayList = state.firstDayList;
+      const lastDayOfLastMonth = new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
+      const lastDayOfCurrentMonth = new Date(state.currentYear, state.currentMonthInNumber + 1, 0).getDate();
+      const currentDay = new Date(state.currentYear, state.currentMonthInNumber,lastDayOfCurrentMonth).getDay();
 
       //전달 날짜 표시
       for (let date in firstDayList) {
-        state.drawCalEx.push(getters.lastDayOfLastMonth - firstDayList[date] + 1);
+        state.drawCalEx.push(lastDayOfLastMonth - firstDayList[date] + 1);
       }
 
       //다음달 날짜 표시
-      const afterDate = state.weekDay - getters.currentDay;
-
+      const afterDate = state.weekDay - currentDay;
       for (let date = 1; date <= afterDate; date++) {
         state.drawCalAfter.push(date);
       }
@@ -137,16 +132,13 @@ const store = () => new Vuex.Store({
       //이달 날짜 표시
       const selectDatesNotNull = selectDates => selectDates !== null && selectDates !== [];
 
-      for (let date = 1; date < getters.lastDayOfCurrentMonth + 1; date++) {
+      for (let date = 1; date < lastDayOfCurrentMonth + 1; date++) {
         if (selectDatesNotNull(state.selectDates)) {
           const selectDatesList = state.selectDates.map(row => row.date);
-          let isSelect =
-            selectDatesList.includes(
-              (state.currentYear.toString()
-                + state.hyphen
-                + (state.currentMonthInNumber + 1).toString()
-                + state.hyphen + date.toString())).toString();
-          let day = new Date(state.currentYear, state.currentMonthInNumber, date).getDay()
+          const curDateList = [state.currentYear.toString(),(state.currentMonthInNumber + 1).toString(), date.toString()]
+          const isSelect =
+            selectDatesList.includes(curDateList.join(state.hyphen)).toString();
+          const day = new Date(state.currentYear, state.currentMonthInNumber, date).getDay()
           state.drawCal.push({"date": date.toString(), "select": isSelect, "day": day});
         }
       }
@@ -171,7 +163,7 @@ const store = () => new Vuex.Store({
       console.log('test');
       axios.get(url + ServiceKey + currentYear.toString(), {headers: {"Accept": "application/json"}})
         .then(res => {
-          let nationalDayList = res.data["response"]["body"]["items"]["item"];
+          const nationalDayList = res.data["response"]["body"]["items"]["item"];
           console.log('test2');
           commit('getNationalList', nationalDayList);
         }).catch(err => {
@@ -190,20 +182,13 @@ const store = () => new Vuex.Store({
   },
   getters: {
     currentMonthName: (state) => {
-      return new Date(state.currentYear, state.currentMonthInNumber).toLocaleString("default", {month: "long"})
+      return new Date(state.currentYear, state.currentMonthInNumber)
+        .toLocaleString("default", {month: "long"})
     },
     rows: (state) => {
       return state.selectDates.length;
-    },
-    currentDay: (state) => {
-      return new Date(state.currentYear, state.currentMonthInNumber, this.lastDayOfCurrentMonth()).getDay();
-    },
-    lastDayOfCurrentMonth: (state) => {
-      return new Date(state.currentYear, state.currentMonthInNumber + 1, 0).getDate();
-    },
-    lastDayOfLastMonth: (state) => {
-      return new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
     }
+
   }
 })
 
