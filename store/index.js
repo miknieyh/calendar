@@ -26,10 +26,7 @@ const store = () => new Vuex.Store({
   mutations: {
     firstDay(state) {
       const firstDay = new Date(state.currentYear, state.currentMonthInNumber, 1).getDay();
-      state.firstDayList = [];
-      for (let i = firstDay; i > 0; i--) {
-        state.firstDayList.push(i);
-      }
+      state.firstDayList = Array(firstDay).fill().map((value,index)=> {return index+1}).reverse();
     },
     updateClickDate(state, newClickDate) {
       state.clickDateString =
@@ -53,17 +50,17 @@ const store = () => new Vuex.Store({
     },
     next(state) {
       const isLastMonth = () => state.currentMonthInNumber === state.lastMonth;
-      if (isLastMonth()) { //11
+      if (isLastMonth()) {
         state.currentYear++;
-        state.currentMonthInNumber = state.firstMonth; //0
+        state.currentMonthInNumber = state.firstMonth;
       }
+
       if (!isLastMonth()) {
         state.currentMonthInNumber++;
       }
     },
     lookUpPage(state) {
-      let curDate = new Date(document.getElementById('startDate').value);
-      state.currentMonthInNumber = curDate.getMonth();
+      state.currentMonthInNumber = new Date(document.getElementById('startDate').value).getMonth();
     },
     getNationalList(state, data) {
       state.nationalDayList.push(data);
@@ -111,23 +108,16 @@ const store = () => new Vuex.Store({
     },
     drawCalendar(state) {
       state.drawCal = [];
-      state.drawCalEx = [];
-      state.drawCalAfter = [];
-      const firstDayList = state.firstDayList;
       const lastDayOfLastMonth = new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
       const lastDayOfCurrentMonth = new Date(state.currentYear, state.currentMonthInNumber + 1, 0).getDate();
       const currentDay = new Date(state.currentYear, state.currentMonthInNumber,lastDayOfCurrentMonth).getDay();
 
       //전달 날짜 표시
-      for (let date in firstDayList) {
-        state.drawCalEx.push(lastDayOfLastMonth - firstDayList[date] + 1);
-      }
+      state.drawCalEx = state.firstDayList.map((value) => {return lastDayOfLastMonth-value+ 1 });
 
       //다음달 날짜 표시
-      const afterDate = state.weekDay - currentDay;
-      for (let date = 1; date <= afterDate; date++) {
-        state.drawCalAfter.push(date);
-      }
+      const afterDate = state.weekDay-currentDay;
+      state.drawCalAfter = Array(afterDate).fill().map((value,index)=>{return index+1});
 
       //이달 날짜 표시
       const selectDatesNotNull = selectDates => selectDates !== null && selectDates !== [];
