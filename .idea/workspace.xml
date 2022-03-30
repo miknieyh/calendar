@@ -124,7 +124,7 @@
       <workItem from="1648444688293" duration="5357000" />
       <workItem from="1648520656583" duration="8940000" />
       <workItem from="1648539587900" duration="5344000" />
-      <workItem from="1648598322153" duration="7194000" />
+      <workItem from="1648598322153" duration="12682000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
       <created>1647500891300</created>
@@ -224,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648603346454</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="코드정리">
+      <created>1648606338627</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1648606338627</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

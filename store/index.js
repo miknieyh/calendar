@@ -107,31 +107,33 @@ const store = () => new Vuex.Store({
       }
     },
     drawCalendar(state) {
-      state.drawCal = [];
       const lastDayOfLastMonth = new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
       const lastDayOfCurrentMonth = new Date(state.currentYear, state.currentMonthInNumber + 1, 0).getDate();
       const currentDay = new Date(state.currentYear, state.currentMonthInNumber,lastDayOfCurrentMonth).getDay();
+      const afterDate = state.weekDay-currentDay;
+      const selectDatesList = state.selectDates.map(row => row.date);
+      const makeDateString = date => {
+        return [state.currentYear.toString(),(state.currentMonthInNumber + 1).toString(), date.toString()]
+      }
+      const makeDay = date => {
+        return new Date(state.currentYear, state.currentMonthInNumber, date).getDay()
+      }
+      const isSelect = date => {
+        return selectDatesList.includes(makeDateString(date).join(state.hyphen)).toString();
+      }
 
-      //전달 날짜 표시
       state.drawCalEx = state.firstDayList.map((value) => {return lastDayOfLastMonth-value+ 1 });
 
-      //다음달 날짜 표시
-      const afterDate = state.weekDay-currentDay;
       state.drawCalAfter = Array(afterDate).fill().map((value,index)=>{return index+1});
 
-      //이달 날짜 표시
-      const selectDatesNotNull = selectDates => selectDates !== null && selectDates !== [];
-
-      for (let date = 1; date < lastDayOfCurrentMonth + 1; date++) {
-        if (selectDatesNotNull(state.selectDates)) {
-          const selectDatesList = state.selectDates.map(row => row.date);
-          const curDateList = [state.currentYear.toString(),(state.currentMonthInNumber + 1).toString(), date.toString()]
-          const isSelect =
-            selectDatesList.includes(curDateList.join(state.hyphen)).toString();
-          const day = new Date(state.currentYear, state.currentMonthInNumber, date).getDay()
-          state.drawCal.push({"date": date.toString(), "select": isSelect, "day": day});
+      state.drawCal = Array(lastDayOfCurrentMonth)
+        .fill()
+        .map((value,date) => {
+        return {
+          "date": (date+1).toString(), "select": isSelect((date+1)), "day": makeDay((date+1))
         }
-      }
+      })
+
     }
   },
   actions: {
