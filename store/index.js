@@ -26,6 +26,7 @@ const store = () => new Vuex.Store({
   mutations: {
     firstDay(state) {
       const firstDay = new Date(state.currentYear, state.currentMonthInNumber, 1).getDay();
+
       state.firstDayList = Array(firstDay)
         .fill()
         .map((value, index) => {
@@ -38,12 +39,14 @@ const store = () => new Vuex.Store({
         + state.YEAR_NAME
         + (state.currentMonthInNumber + 1).toString()
         + state.MONTH_NAME + newClickDate.date["date"] + state.DATE_NAME;
+
       const clickDateList =
         [state.currentYear.toString(), (state.currentMonthInNumber + 1).toString(), newClickDate.date["date"]];
       state.clickDate = clickDateList.join(state.hyphen);
     },
     prev(state) {
       const isFirstMonth = () => state.currentMonthInNumber === state.firstMonth;
+
       if (isFirstMonth()) { //0
         state.currentYear--;
         state.currentMonthInNumber = state.lastMonth; //11
@@ -54,11 +57,11 @@ const store = () => new Vuex.Store({
     },
     next(state) {
       const isLastMonth = () => state.currentMonthInNumber === state.lastMonth;
+
       if (isLastMonth()) {
         state.currentYear++;
         state.currentMonthInNumber = state.firstMonth;
       }
-
       if (!isLastMonth()) {
         state.currentMonthInNumber++;
       }
@@ -67,12 +70,13 @@ const store = () => new Vuex.Store({
       state.currentMonthInNumber = new Date(document.getElementById('startDate').value).getMonth();
     },
     getNationalList(state, data) {
-      data.forEach(data => {
-        const tempDate = String(data["locdate"]);
+      data.forEach(({locdate}) => {
+        const tempDate = String(locdate);
         const NationalDate = new Date(tempDate.substring(0, 4), tempDate.slice(4, 6), tempDate.slice(6));
         const NationalDateList =
           [NationalDate.getFullYear().toString(), NationalDate.getMonth().toString(), NationalDate.getDate().toString()]
         const nationalDateString = NationalDateList.join(state.hyphen);
+
         state.nationalDateStringList.push(nationalDateString);
       })
     },
@@ -85,10 +89,12 @@ const store = () => new Vuex.Store({
         6: 'primary', //sat
         null: 'light'
       }
+
       while (curDate <= endDate) {
         const curDateList =
           [curDate.getFullYear().toString(), (curDate.getMonth() + 1).toString(), curDate.getDate().toString()]
         const curDateListString = curDateList.join(state.hyphen);
+
         let temp = {};
         temp.date = curDate.getFullYear() + state.hyphen + (curDate.getMonth() + 1) + state.hyphen + curDate.getDate();
         temp.day = state.days[curDate.getDay()];
@@ -102,8 +108,9 @@ const store = () => new Vuex.Store({
       const lastDayOfLastMonth = new Date(state.currentYear, state.currentMonthInNumber, 0).getDate();
       const lastDayOfCurrentMonth = new Date(state.currentYear, state.currentMonthInNumber + 1, 0).getDate();
       const currentDay = new Date(state.currentYear, state.currentMonthInNumber, lastDayOfCurrentMonth).getDay();
+
       const afterDate = state.weekDay - currentDay;
-      const selectDatesList = state.selectDates.map(row => row.date);
+      const selectDatesList = state.selectDates.map(({date}) => date);
 
       const makeDateString = date => {
         return [state.currentYear.toString(), (state.currentMonthInNumber + 1).toString(), date.toString()]
@@ -147,13 +154,11 @@ const store = () => new Vuex.Store({
       context.commit('lookUpPage');
     },
     getNationalList({commit}, currentYear) {
-      const url = "http://localhost:3000/api";
-      const ServiceKey = '?_type=json&ServiceKey=pttHWIl4dfMuWu4ZBaBagNtAzamjrs%2BMGE9JDETUED7tu4y1Dt8ajPP7qmxXBJZQTLLhFHjZ84EkuMHfkxZcnA%3D%3D&solYear=';
-      console.log('test');
+      const url = process.env.URL;
+      const ServiceKey = process.env.SERVICE_KEY;
       axios.get(url + ServiceKey + currentYear.toString(), {headers: {"Accept": "application/json"}})
         .then(res => {
           const nationalDayList = res.data["response"]["body"]["items"]["item"];
-          console.log('test2');
           commit('getNationalList', nationalDayList);
         }).catch(err => {
         console.log("error : ", err);
