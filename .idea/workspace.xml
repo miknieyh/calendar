@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="코드정리">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment=".env파일 생성, console.log 삭제, 여백조정, destructuring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +126,7 @@
       <workItem from="1648539587900" duration="5344000" />
       <workItem from="1648598322153" duration="15795000" />
       <workItem from="1648625897438" duration="3433000" />
-      <workItem from="1648686773143" duration="215000" />
+      <workItem from="1648686773143" duration="636000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
       <created>1647500891300</created>
@@ -264,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648626808197</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary=".env파일 생성, console.log 삭제, 여백조정, destructuring">
+      <created>1648687129666</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1648687129666</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +297,8 @@
     <MESSAGE value="pagination 완료, 토,일 표시 완료, inputScreen과 searchScreen ui 그리기 완료" />
     <MESSAGE value="다음달 표기" />
     <MESSAGE value="코드정리" />
-    <option name="LAST_COMMIT_MESSAGE" value="코드정리" />
+    <MESSAGE value=".env파일 생성, console.log 삭제, 여백조정, destructuring" />
+    <option name="LAST_COMMIT_MESSAGE" value=".env파일 생성, console.log 삭제, 여백조정, destructuring" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

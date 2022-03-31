@@ -21,6 +21,8 @@ const store = () => new Vuex.Store({
     MONTH_NAME: "월",
     DATE_NAME: "일",
     hyphen: '-',
+    YES: "예",
+    NO: "아니오",
     nationalDateStringList: []
   },
   mutations: {
@@ -99,7 +101,7 @@ const store = () => new Vuex.Store({
         temp.date = curDate.getFullYear() + state.hyphen + (curDate.getMonth() + 1) + state.hyphen + curDate.getDate();
         temp.day = state.days[curDate.getDay()];
         temp._rowVariant = weekend[curDate.getDay()]
-        temp.isNationalDay = state.nationalDateStringList.includes(curDateListString) ? "예" : "아니오";
+        temp.isNationalDay = state.nationalDateStringList.includes(curDateListString) ? state.YES : state.NO;
         state.selectDates.push(temp);
         curDate.setDate(curDate.getDate() + 1);
       }
@@ -137,7 +139,6 @@ const store = () => new Vuex.Store({
             "date": (date + 1).toString(), "select": isSelect((date + 1)), "day": makeDay((date + 1))
           }
         })
-
     }
   },
   actions: {
