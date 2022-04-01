@@ -1,0 +1,23 @@
+export const state = () => ({
+  currentMonthName: "",
+  days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  currentMonthInNumber: new Date().getMonth(),
+  currentYear: new Date().getFullYear(),
+  firstMonth: 0,
+  lastMonth: 11,
+  weekDay: 6,
+  clickDateString: "",
+  selectDates: [],
+  drawCalEx: [],
+  drawCal: [],
+  clickDate: "",
+  firstDayList: [],
+  drawCalAfter: [],
+  YEAR_NAME: "년",
+  MONTH_NAME: "월",
+  DATE_NAME: "일",
+  hyphen: '-',
+  YES: "예",
+  NO: "아니오",
+  nationalDateStringList: []
+})

@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment=".env파일 생성, console.log 삭제, 여백조정, destructuring">
+    <list default="true" id="b379abbd-081f-481f-b760-7f82cca95ce8" name="Changes" comment="&quot;예&quot;,&quot;아니오&quot;를 state.YES,state.NO로 변경">
+      <change afterPath="$PROJECT_DIR$/store/modules/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/modules/getters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/modules/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/modules/state.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -126,7 +132,9 @@
       <workItem from="1648539587900" duration="5344000" />
       <workItem from="1648598322153" duration="15795000" />
       <workItem from="1648625897438" duration="3433000" />
-      <workItem from="1648686773143" duration="636000" />
+      <workItem from="1648686773143" duration="890000" />
+      <workItem from="1648691993755" duration="7068000" />
+      <workItem from="1648788065672" duration="2610000" />
     </task>
     <task id="LOCAL-00001" summary="nuxt.js init &#10;이전달력, 이후달력 조회&#10;선택한 날짜 색상 다르게 표기">
       <created>1647500891300</created>
@@ -268,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648687129666</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="&quot;예&quot;,&quot;아니오&quot;를 state.YES,state.NO로 변경">
+      <created>1648687487905</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1648687487905</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,9 +313,20 @@
     <MESSAGE value="다음달 표기" />
     <MESSAGE value="코드정리" />
     <MESSAGE value=".env파일 생성, console.log 삭제, 여백조정, destructuring" />
-    <option name="LAST_COMMIT_MESSAGE" value=".env파일 생성, console.log 삭제, 여백조정, destructuring" />
+    <MESSAGE value="&quot;예&quot;,&quot;아니오&quot;를 state.YES,state.NO로 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;예&quot;,&quot;아니오&quot;를 state.YES,state.NO로 변경" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/store/index.js</url>
+          <line>14</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="js.build_tools.npm">
         <watch expression="axios.request" language="JavaScript" />

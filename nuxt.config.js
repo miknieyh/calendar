@@ -1,6 +1,10 @@
 const webpack = require("webpack")
-
+require('dotenv').config()
 module.exports = {
+  env : {
+    URL : 'http://localhost:3000/api',
+    SERVICE_KEY : '?_type=json&ServiceKey=pttHWIl4dfMuWu4ZBaBagNtAzamjrs%2BMGE9JDETUED7tu4y1Dt8ajPP7qmxXBJZQTLLhFHjZ84EkuMHfkxZcnA%3D%3D&solYear=',
+  },
   devServer: {
     host: '0.0.0.0',
     hot: true,
